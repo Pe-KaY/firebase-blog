@@ -19,6 +19,5 @@ export const routes: Routes = [
       import('./components/register/register.component').then(
         (m) => m.RegisterComponent
       ),
-    canActivate: [authGuard],
   },
 ];
