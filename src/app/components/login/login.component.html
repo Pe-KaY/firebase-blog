@@ -1,0 +1,34 @@
+<div class="container">
+
+    <!-- invalid message -->
+    <div class="content">
+      <div class="loading" *ngIf="loading">
+        <img src="../../../assets/Magnify.apng" alt="" />
+      </div>
+      <!-- form -->
+      <form [formGroup]="loginForm">
+        <p class="title">login</p>
+        <div class="details">
+          <input
+            type="text"
+            formControlName="email"
+            placeholder="Email address"
+            id="username"
+          />
+  
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+            id="password"
+          />
+        </div>
+        <button type="submit" (click)="login()">Login to your account</button>
+        <p class="signup">
+          Don't have an account? <a routerLink="/register">Sign Up</a>
+        </p>
+        <p *ngIf="errorMessage" class="invalid">Invalid Credentials</p>
+      </form>
+    </div>
+  </div>
+  

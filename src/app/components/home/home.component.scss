@@ -1,0 +1,214 @@
+@use "../../mixins/mixins.scss";
+
+.main {
+  border: 1px solid red;
+  height: 100vh;
+  place-content: center;
+  padding: 1rem;
+
+  .content {
+    // border: 1px solid green;
+    margin: auto;
+    width: 50rem;
+    height: 100%;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .profilewrap {
+      //   border: 1px solid blue;
+      height: 10rem;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      // profile pic and name container
+      .profile {
+        // border: 1px solid purple;
+        // width: 30rem;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        // profileimage
+        .profileimage {
+          width: 9rem;
+          height: 9rem;
+          border-radius: 100vw;
+          overflow: hidden;
+          position: relative;
+          &:hover {
+            .upload {
+              visibility: visible;
+            }
+          }
+
+          img{
+            width: 100%;
+            height: 100%;
+          }
+
+          .upload {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.348);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+
+            i {
+              font-size: 2rem;
+            }
+            input {
+              display: block;
+              width: 100%;
+              position: absolute;
+              cursor: pointer;
+              opacity: 0;
+            }
+          }
+        }
+        // username
+        .username {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          .name {
+            font-size: 2rem;
+            font-weight: bold;
+          }
+
+          .status {
+            display: flex;
+            align-items: center;
+            // border: 1px solid orange;
+            gap: 0.5rem;
+
+            span {
+              background-color: greenyellow;
+              display: inline-block;
+              width: 0.5rem;
+              height: 0.5rem;
+              border-radius: 100vw;
+            }
+          }
+
+          button {
+            @include mixins.button(red);
+          }
+        }
+      }
+
+      //   post blog
+      .postblog-wrap {
+        border: 1px solid violet;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .buttons {
+          border: 1px solid blue;
+          width: 100%;
+          height: 50%;
+          display: flex;
+
+          button {
+            flex: 1;
+            cursor: pointer;
+          }
+        }
+
+        .notification {
+          width: 100%;
+          height: 50%;
+          border: 1px solid green;
+          display: flex;
+
+          img{
+            &.noti{
+              animation: shake 0.1s infinite alternate ;
+            }
+          }
+
+          .notimessage-wrap {
+            // border: 1px solid red;
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            .notitext {
+              font-size: 1.2;
+              font-weight: bold;
+              background: linear-gradient(to right, #ff7e5f, #feb47b);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              color: transparent;
+            }
+          }
+        }
+      }
+    }
+
+    .blogs {
+      border: 1px solid pink;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow: auto;
+      padding: 1rem;
+
+      form {
+        border: 1px solid blue;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        input {
+          width: 50%;
+          width: 50%;
+          height: 4rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          font-size: 1.2rem;
+          padding: 0.5rem;
+        }
+
+        textarea {
+          width: 70%;
+          height: 40%;
+          font-size: 1.2rem;
+          padding: 0.5rem;
+        }
+
+        button {
+          display: block;
+          width: 30%;
+          height: 3rem;
+          padding: 10px 20px;
+          border-radius: 0.7rem;
+        }
+      }
+    }
+  }
+
+
+  @keyframes shake {
+    from{
+      transform: rotate(-5deg);
+    }
+    to{
+      transform: rotate(5deg);
+    }
+  }
+}

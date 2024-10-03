@@ -1,0 +1,26 @@
+<div class="container">
+  <p class="author">{{ comment.author }}</p>
+  <p class="content">{{ comment.content }}</p>
+  <p class="time">{{ comment.timeStamp }}</p>
+  <ng-container
+    *ngIf="auth.currentUser?.uid === comment.authorId && !editComment"
+  >
+    <div class="buttons">
+      <button (click)="edit()">Edit</button>
+      <button (click)="blogService.deleteComment(blogId, comment.id)">
+        Delete
+      </button>
+    </div>
+  </ng-container>
+
+  <!-- editing comment -->
+  <ng-container *ngIf="editComment">
+    <form [formGroup]="editCommentForm">
+      <textarea formControlName="content" placeholder="Comment"></textarea>
+      <div class="buttons">
+        <button (click)="saveComment()">Save</button>
+        <button (click)="cancel()">cancel</button>
+      </div>
+    </form>
+  </ng-container>
+</div>

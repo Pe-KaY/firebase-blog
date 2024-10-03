@@ -1,0 +1,45 @@
+<div class="container">
+  <!-- invalid message -->
+  <div class="content">
+    <div class="loading" *ngIf="loading">
+      <img src="../../assets/Magnify.apng" alt="" />
+    </div>
+    <!-- form -->
+    <form [formGroup]="SignupForm">
+      <p class="title">Register</p>
+      <div class="details">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Email address"
+          id="username"
+        />
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="username"
+          id="username"
+        />
+
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          id="password"
+        />
+
+        <input
+          type="password"
+          formControlName="repeatpassword"
+          placeholder="Repeat password"
+          id="password"
+        />
+      </div>
+      <button type="submit" (click)="signup()">Create an account</button>
+      <p class="signup">
+        Already have an account? <a routerLink="/login">Login</a>
+      </p>
+      <p *ngIf="errorMessage" class="invalid">Passwords do not match</p>
+    </form>
+  </div>
+</div>

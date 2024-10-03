@@ -1,0 +1,58 @@
+<div class="container">
+  <p class="title">{{ blog.title }} by {{ blog.author }}</p>
+  <p class="content">{{ blog.content }}</p>
+  <p class="comments" (click)="toggleComments()">
+    Comments ({{ (comments$ | async)?.length }})
+  </p>
+  <!-- blog control buttons -->
+  <div class="buttonswrap">
+    <ng-container
+      *ngIf="
+        blog.authorId === auth.currentUser?.uid && !addEditBlog && !addComment
+      "
+    >
+      <button (click)="editBlog()">Edit</button>
+      <button (click)="blogService.deleteBlog(blog.id)">Delete</button>
+    </ng-container>
+    <button (click)="togggleAddComment()" *ngIf="!addEditBlog && !addComment">
+      Comment
+    </button>
+
+    <!-- edit blog post -->
+    <ng-container *ngIf="addEditBlog">
+      <form [formGroup]="postForm">
+        <input type="text" formControlName="title" placeholder="Title" />
+        <textarea formControlName="content" placeholder="Content"></textarea>
+        <div class="buttons">
+          <button (click)="save()">Save</button>
+          <button (click)="cancel()">cancel</button>
+        </div>
+      </form>
+    </ng-container>
+
+    <!-- add comment -->
+    <ng-container *ngIf="addComment">
+      <form [formGroup]="comentForm">
+        <input type="text" formControlName="content" placeholder="Comment" />
+        <div class="buttons">
+          <button (click)="saveComment()">Save</button>
+          <button (click)="cancelComment()">cancel</button>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <!-- comments -->    
+  <div class="comments-wrap" #viewComments>
+    <div class="comments">
+      <ng-container *ngIf="comments$ | async as comments">
+        <ng-container *ngIf="comments.length > 0">
+          <p>comments:</p>
+          <app-comment
+            *ngFor="let comment of comments"
+            [comment]="comment" [blogId]="blog.id"
+          ></app-comment>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

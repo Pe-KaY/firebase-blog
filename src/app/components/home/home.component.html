@@ -1,0 +1,85 @@
+<div class="main">
+  <div class="content">
+    <!-- profile section -->
+    <div class="profilewrap">
+      <div class="profile">
+        <div class="profileimage">
+          <img
+            [src]="
+              auth.currentUser?.photoURL || '../../../assets/guest-Avatar.png'
+            "
+            alt="profile image"
+          />
+          <div class="upload">
+            <i>🖼️</i>
+            <input type="file" (change)="uploadProfilePhoto($event)" />
+          </div>
+        </div>
+        <div class="username">
+          <p class="name">{{ auth.currentUser?.displayName }}</p>
+          <div class="status">
+            <span></span>
+            <p>Online</p>
+          </div>
+          <div class="authentication">
+            <button (click)="authorizationService.logout()">Sign Out</button>
+          </div>
+        </div>
+      </div>
+      <!-- post blog -->
+      <div class="postblog-wrap">
+        <div class="buttons">
+          <button (click)="dataService.allBlogsView()">All Blogs</button>
+          <button (click)="dataService.myBlogsView()">My Blogs</button>
+          <button (click)="dataService.addEditBlogView()">Add Blog</button>
+        </div>
+        <div class="notification">
+          <!-- notification img  -->
+          <img
+            #bell
+            src="../../../assets/notification-svgrepo-com.svg"
+            alt="noti icon"
+          />
+          <div class="notimessage-wrap">
+            <p class="notitext">{{ notification }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- blogs section -->
+    <div class="blogs">
+      <!-- all blogs -->
+      <ng-container
+        *ngIf="dataService.allBlogs && (getBlogs$ | async) as blogs"
+      >
+        <app-blogs *ngFor="let blog of blogs" [blog]="blog"></app-blogs>
+      </ng-container>
+
+      <!-- my blogs -->
+      <ng-container *ngIf="dataService.myBlogs">
+        <div class="myblogs" *ngIf="myBLogs$ | async as myBlogs">
+          <app-blogs *ngFor="let blog of myBlogs" [blog]="blog"> </app-blogs>
+        </div>
+      </ng-container>
+
+      <!-- Add blog -->
+      <ng-container *ngIf="dataService.addEditBlog">
+        <form [formGroup]="postForm">
+          <input
+            type="text"
+            formControlName="title"
+            placeholder="Title"
+            id="title"
+          />
+          <textarea
+            formControlName="content"
+            placeholder="Content"
+            id="content"
+          >
+          </textarea>
+          <button (click)="addBlog()">Post</button>
+        </form>
+      </ng-container>
+    </div>
+  </div>
+</div>
