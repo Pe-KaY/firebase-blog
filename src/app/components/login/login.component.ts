@@ -46,7 +46,7 @@ export class LoginComponent {
           this.authorizationService.userLogin = true;
           setTimeout(() => {
             this.loading = false;
-            this.router.navigate(['']);
+            this.router.navigate(['/home']);
           }, 5000);
         },
         (err) => {

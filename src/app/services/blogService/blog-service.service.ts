@@ -6,6 +6,8 @@ import {
   addDoc,
   doc,
   deleteDoc,
+  query,
+  orderBy,
 } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
@@ -25,7 +27,7 @@ export class BlogServiceService {
     return addDoc(blogsRef, {
       ...blog,
       authorId: this.auth.currentUser?.uid, // Attach the author's user ID
-      timestamp: new Date(),
+      timeStamp: this.getCurrentFormattedDate(),
       author: this.auth.currentUser?.displayName,
     });
   }
@@ -33,12 +35,16 @@ export class BlogServiceService {
   // Fetch all blog posts
   getBlogs(): Observable<blog[]> {
     const blogsRef = collection(this.firestore, 'blogs');
-    return collectionData(blogsRef, { idField: 'id' }) as Observable<blog[]>;
+     // Use query to order by createdAt in descending order (latest on top)
+     const blogsQuery = query(blogsRef, orderBy('timeStamp', 'desc'));
+
+    return collectionData(blogsQuery, { idField: 'id' }) as Observable<blog[]>;
   }
   // get Comments
   getComments(blodId: string) {
     const commentsRef = collection(this.firestore, `blogs/${blodId}/comments`);
-    return collectionData(commentsRef, { idField: 'id' }) as Observable<
+    const commentsQuery = query(commentsRef, orderBy('timeStamp', 'desc'));
+    return collectionData(commentsQuery, { idField: 'id' }) as Observable<
       comment[]
     >;
   }
@@ -48,7 +54,7 @@ export class BlogServiceService {
     const blogRef = doc(this.firestore, `blogs/${blogId}`);
     return updateDoc(blogRef, {
       ...updatedblog,
-      timestamp: this.getCurrentFormattedDate(),
+      timeStamp: this.getCurrentFormattedDate(),
       authorId: this.auth.currentUser?.uid,
       author: this.auth.currentUser?.displayName,
     });

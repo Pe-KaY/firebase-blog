@@ -58,7 +58,7 @@ export class RegisterComponent {
           this.authorizationService.userLogin = true;
           setTimeout(() => {
             this.loading = false;
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
             // this.dataService.modal = false;
           }, 5000);
         },
