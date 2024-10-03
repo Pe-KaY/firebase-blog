@@ -1,16 +1,11 @@
 {
   "hosting": {
-<<<<<<< HEAD
-    "public": "./dist/firebase-blog/browser",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-=======
-    "public": "dist/firebase-blog",
+    "public": "dist/firebase-blog/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
->>>>>>> de40b3075eae1387d8bd518b16c8b6c9062b30f2
     "rewrites": [
       {
         "source": "**",
