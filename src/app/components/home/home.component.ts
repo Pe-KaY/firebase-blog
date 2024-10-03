@@ -77,6 +77,7 @@ export class HomeComponent {
       const blog = this.postForm.value;
       this.blogService.addBlog(blog);
       this.postForm.reset();
+      this.dataService.allBlogsView();
     }
   }
 
