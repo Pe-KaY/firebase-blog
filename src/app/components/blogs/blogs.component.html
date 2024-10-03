@@ -1,6 +1,7 @@
 <div class="container">
   <p class="title">{{ blog.title }} by {{ blog.author }}</p>
   <p class="content">{{ blog.content }}</p>
+  <p class="content">{{ blog.timeStamp }}</p>
   <p class="comments" (click)="toggleComments()">
     Comments ({{ (comments$ | async)?.length }})
   </p>
