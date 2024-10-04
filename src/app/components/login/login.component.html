@@ -24,6 +24,7 @@
           />
         </div>
         <button type="submit" (click)="login()">Login to your account</button>
+        <button type="submit" (click)="authorizationService.signInWithGoogle()">Sign In with Google</button>
         <p class="signup">
           Don't have an account? <a routerLink="/register">Sign Up</a>
         </p>
